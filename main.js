@@ -9,6 +9,7 @@ const addTodoListItem = () => {
 
     const newTodoListItemCheckbox = document.createElement('input');
     newTodoListItemCheckbox.setAttribute('type', 'checkbox');
+    newTodoListItemCheckbox.addEventListener('click', checkTodoListItem);
 
     const newTodoListItemText = document.createElement('input');
     newTodoListItemText.setAttribute('type', 'text');
@@ -31,4 +32,17 @@ todoInputButton.addEventListener('click', addTodoListItem);
 // removing item
 const removeTodoListItem = (event) => {
     event.target.parentNode.remove();
+}
+
+
+// chcking item
+const checkTodoListItem = (event) => {
+    if (event.target.checked) {
+        event.target.nextSibling.style.color = 'lightgray';
+        event.target.nextSibling.style.textDecoration = 'line-through';
+    }
+    else {
+        event.target.nextSibling.style.color = 'black';
+        event.target.nextSibling.style.textDecoration = '';
+    }
 }
