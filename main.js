@@ -1,3 +1,4 @@
+// adding item
 const todoInputButton = document.querySelector("#todo-input > button");
 
 const addTodoListItem = () => {
@@ -15,6 +16,7 @@ const addTodoListItem = () => {
 
     const newTodoListItemButton = document.createElement('button');
     newTodoListItemButton.innerText = "-";
+    newTodoListItemButton.addEventListener('click', removeTodoListItem);
 
     newTodoListItem.appendChild(newTodoListItemCheckbox);
     newTodoListItem.appendChild(newTodoListItemText);
@@ -24,3 +26,9 @@ const addTodoListItem = () => {
 }
 
 todoInputButton.addEventListener('click', addTodoListItem);
+
+
+// removing item
+const removeTodoListItem = (event) => {
+    event.target.parentNode.remove();
+}
