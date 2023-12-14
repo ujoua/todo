@@ -1,48 +1,40 @@
-// adding item
-const todoInputButton = document.querySelector("#todo-input > button");
-
 const addTodoListItem = () => {
     const content = document.querySelector("#todo-input > input[type=text]").value;
 
-    const newTodoListItem = document.createElement('div');
-    newTodoListItem.setAttribute('class', 'todo-list-item');
+    document.querySelector("#todo-list").innerHTML +=
+        `<div class="todo-list-item">
+            <input type="checkbox"">
+            <input type="text" value=${content}></input>
+            <button>-</button>
+        </div>`;
 
-    const newTodoListItemCheckbox = document.createElement('input');
-    newTodoListItemCheckbox.setAttribute('type', 'checkbox');
-    newTodoListItemCheckbox.addEventListener('click', checkTodoListItem);
-
-    const newTodoListItemText = document.createElement('input');
-    newTodoListItemText.setAttribute('type', 'text');
-    newTodoListItemText.setAttribute('value', content);
-
-    const newTodoListItemButton = document.createElement('button');
-    newTodoListItemButton.innerText = "-";
-    newTodoListItemButton.addEventListener('click', removeTodoListItem);
-
-    newTodoListItem.appendChild(newTodoListItemCheckbox);
-    newTodoListItem.appendChild(newTodoListItemText);
-    newTodoListItem.appendChild(newTodoListItemButton);
-
-    document.querySelector("#todo-list").appendChild(newTodoListItem);
+    document.querySelector("#todo-list").lastChild
 }
 
+const todoInputButton = document.querySelector("#todo-input > button");
 todoInputButton.addEventListener('click', addTodoListItem);
 
 
-// removing item
-const removeTodoListItem = (event) => {
-    event.target.parentNode.remove();
-}
-
-
-// chcking item
 const checkTodoListItem = (event) => {
-    if (event.target.checked) {
-        event.target.nextSibling.style.color = 'lightgray';
-        event.target.nextSibling.style.textDecoration = 'line-through';
-    }
-    else {
-        event.target.nextSibling.style.color = 'black';
-        event.target.nextSibling.style.textDecoration = '';
+    if (event.target.tagName === 'INPUT' && event.target.type === 'checkbox') {
+        const todoListItemTextBox = event.target.nextElementSibling;
+
+        if (event.target.checked) {
+            todoListItemTextBox.style.color = 'lightgray';
+            todoListItemTextBox.style.textDecoration = 'line-through';
+        } else {
+            todoListItemTextBox.style.color = 'black';
+            todoListItemTextBox.style.textDecoration = '';
+        }
     }
 }
+
+const removeTodoListItem = (event) => {
+    if (event.target.tagName == 'BUTTON') {
+        event.target.parentNode.remove();
+    }
+}
+
+const todoList = document.querySelector("#todo-list");
+todoList.addEventListener('click', checkTodoListItem);
+todoList.addEventListener('click', removeTodoListItem);
