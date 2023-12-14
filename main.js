@@ -1,18 +1,21 @@
 const addTodoListItem = () => {
-    const content = document.querySelector("#todo-input > input[type=text]").value;
+    const todoInputText = document.querySelector("#todo-input > input[type=text]");
 
     document.querySelector("#todo-list").innerHTML +=
         `<div class="todo-list-item">
             <input type="checkbox"">
-            <input type="text" value=${content}></input>
+            <input type="text" value=${todoInputText.value}></input>
             <button>-</button>
         </div>`;
 
-    document.querySelector("#todo-list").lastChild
+    todoInputText.value = "";
 }
 
 const todoInputButton = document.querySelector("#todo-input > button");
-todoInputButton.addEventListener('click', addTodoListItem);
+todoInputButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    addTodoListItem();
+});
 
 
 const checkTodoListItem = (event) => {
