@@ -1,14 +1,15 @@
 const addTodoListItem = () => {
     const todoInputText = document.querySelector("#todo-input > input[type=text]");
-
-    document.querySelector("#todo-list").innerHTML +=
-        `<div class="todo-list-item">
+    if (todoInputText.value.trim()) {
+        document.querySelector("#todo-list").innerHTML +=
+            `<div class="todo-list-item">
             <input type="checkbox"">
-            <input type="text" value=${todoInputText.value}></input>
+            <input type="text" value="${todoInputText.value}">
             <button>-</button>
         </div>`;
 
-    todoInputText.value = "";
+        todoInputText.value = "";
+    }
 }
 
 const todoInputButton = document.querySelector("#todo-input > button");
